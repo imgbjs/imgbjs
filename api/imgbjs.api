@@ -1,0 +1,39 @@
+type UploadImgRequest {
+	Hash      string `json:"hash,optional"`
+	Name      string `json:"name,optional"`
+	Ext       string `json:"ext,optional"`
+	Size      int64  `json:"size,optional"`
+	ShortName string `json:"shortname,optional"`
+}
+
+type UploadImgResponse {
+	DownloadURL string `json:"downloadurl"`
+	ShortURL    string `json:"shorturl"`
+}
+
+type RedirectShortURLRequest {
+	ShortName string `path:"shortname"`
+}
+
+type RedirectShortURLResponse {
+}
+
+type IndexRequest {
+}
+
+type IndexResponse {
+}
+
+service imgbjs-api {
+	@doc "主界面"
+	@handler Index
+	get /index (IndexRequest) returns (IndexResponse)
+	
+	@doc "上传图片"
+	@handler UploadImg
+	post /uploadimg (UploadImgRequest) returns (UploadImgResponse)
+	
+	@doc "短链重定向"
+	@handler RedirectShortURL
+	get /a/:shortname (RedirectShortURLRequest) returns (RedirectShortURLResponse)
+}

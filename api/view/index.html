@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function uploadimg() {
+            var xhr = new XMLHttpRequest()
+            var data = new FormData()
+            var shortname = document.getElementById("shortname").value
+            var file = document.getElementById("file-uploader").files[0]
+            data.append("shortname", shortname)
+            data.append("file", file)
+            xhr.open("POST", "/uploadimg")
+            // xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=l3iPy71otz")
+            // xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary="+data.file.)
+            xhr.onloadend = function () {
+                var box = document.getElementById("respbox")
+                box.textContent = xhr.responseText
+            }
+            xhr.send(data)
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="file" id="file-uploader">
+    </div>
+    <label>　</label>
+    <div>
+        <input type="text" id="shortname">
+    </div>
+    <label>　</label>
+    <div>
+        <button onclick="uploadimg()">确定</button>
+    </div>
+    <label>　</label>
+    <div>
+        <textarea id="respbox" cols="30" rows="10"></textarea>
+    </div>
+</body>
+</html>

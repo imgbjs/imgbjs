@@ -1,0 +1,30 @@
+Name: imgbjs-api
+Host: 0.0.0.0
+Port: 8888
+Log:
+  Mode: console
+  Level: info
+  Encoding: plain
+MaxBytes: 5242880
+Timeout: 30000
+
+DB:
+  DataSource: user:password@tcp(localhost:3306)/database?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+Cache:
+  - Host: redis:6379
+    Pass: ''
+
+Redis:
+  Host: redis:6379
+  Pass: ''
+
+UserRpcConf:
+  NonBlock: true
+  Etcd:
+    Hosts:
+    - etcd:2379
+    Key: core.rpc
+    User: root
+    Pass: ''
+
+ShortNamePrefix: 'http://x.xxx.com/a/'
