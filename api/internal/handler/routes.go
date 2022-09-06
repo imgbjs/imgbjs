@@ -14,6 +14,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
+				Path:    "/",
+				Handler: Game2048Handler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
 				Path:    "/index",
 				Handler: IndexHandler(serverCtx),
 			},

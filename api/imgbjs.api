@@ -25,6 +25,10 @@ type IndexResponse {
 }
 
 service imgbjs-api {
+	@doc "2048"
+	@handler Game2048
+	get / (IndexRequest) returns (IndexResponse)
+	
 	@doc "主界面"
 	@handler Index
 	get /index (IndexRequest) returns (IndexResponse)

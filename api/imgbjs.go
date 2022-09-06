@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"github.com/imgbjs/imgbjs/api/internal/config"
 	"github.com/imgbjs/imgbjs/api/internal/handler"
@@ -29,6 +30,25 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/js/:file",
+				Handler: http.StripPrefix("/js/", http.FileServer(http.Dir("view/js"))).ServeHTTP,
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/style/:file",
+				Handler: http.StripPrefix("/style/", http.FileServer(http.Dir("view/style"))).ServeHTTP,
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/meta/:file",
+				Handler: http.StripPrefix("/meta/", http.FileServer(http.Dir("view/meta"))).ServeHTTP,
+			},
+		},
+	)
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }
